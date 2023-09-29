@@ -22,7 +22,7 @@ type Latest struct {
 
 type Image struct {
 	Mediatype string `json:"mediatype"`
-	Size      any    `json:"size"`
+	SizeBytes *uint  `json:"size"`
 	Width     int    `json:"width"`
 	Height    int    `json:"height"`
 	Duration  any    `json:"duration"`
@@ -35,6 +35,10 @@ type File struct {
 	Latest             Latest `json:"latest"`
 	Preferred          Image  `json:"preferred"`
 	Original           Image  `json:"original"`
+}
+
+type filesWrapper struct {
+	Files []File `json:"files"`
 }
 
 // GetPage is a request object for fetching a page. Create it with NewGetPageReq,
@@ -93,10 +97,10 @@ func (g *GetMedia) Resolve(ctx context.Context) ([]File, error) {
 		return nil, err
 	}
 
-	var getResp []File
+	var getResp filesWrapper
 	if err = json.Unmarshal(buf, &getResp); err != nil {
 		return nil, err
 	}
 
-	return getResp, nil
+	return getResp.Files, nil
 }

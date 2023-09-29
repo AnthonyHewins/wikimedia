@@ -76,7 +76,7 @@ func (c *Core) Do(req *http.Request) ([]byte, error) {
 
 	var x MediawikiErr
 	if err := json.Unmarshal(buf, &x); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("server did not return valid JSON: %w", err)
 	}
 
 	return nil, &x
