@@ -63,8 +63,8 @@ type GetMedia struct {
 	Title string
 }
 
-func (c *Client) NewGetMediaReq(project, language, title string) *GetPage {
-	return &GetPage{
+func (c *Client) NewGetMediaReq(project, language, title string) *GetMedia {
+	return &GetMedia{
 		a:        c.a,
 		Project:  project,
 		Language: language,
