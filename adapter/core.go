@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+const DefaultBaseURL = "https://api.wikimedia.org"
+
 // MediawikiErr is the common error struct for errors in the API.
 // Error details are placed into a JSON object called messageTranslations
 // to handle multiple languages; therefore getting the details is a little difficult.
